@@ -735,7 +735,7 @@ BattleInfo * CGameState::setupBattle(int3 tile, const CArmedInstance *armies[2],
 {
 	const TerrainTile &t = map->getTile(tile);
 	ETerrainType terrain = t.terType;
-	if(t.isCoastal() && !t.isWater())
+	if(map->isCoastalTile(tile)) //coastal tile is always ground
 		terrain = ETerrainType::SAND;
 
 	BFieldType terType = battleGetBattlefieldType(tile);
@@ -1953,7 +1953,7 @@ BFieldType CGameState::battleGetBattlefieldType(int3 tile)
 		}
 	}
 
-	if(!t.isWater() && t.isCoastal())
+	if(map->isCoastalTile(tile)) //coastal tile is always ground
 		return BFieldType::SAND_SHORE;
 
 	switch(t.terType)
@@ -2074,11 +2074,6 @@ void CGameState::getNeighbours(const TerrainTile &srct, int3 tile, std::vector<i
 
 		const TerrainTile &hlpt = map->getTile(hlp);
 
-// 		//we cannot visit things from blocked tiles
-// 		if(srct.blocked && !srct.visitable && hlpt.visitable && srct.blockingObjects.front()->ID != HEROI_TYPE)
-// 		{
-// 			continue;
-// 		}
 
         if(srct.terType == ETerrainType::WATER && limitCoastSailing && hlpt.terType == ETerrainType::WATER && dir.x && dir.y) //diagonal move through water
 		{
@@ -3546,9 +3541,8 @@ bool CPathfinder::goodForLandSeaTransition()
 		else //disembark
 		{
 			//can disembark only on coastal tiles
-			if(!dt->isCoastal())
-				return false;
-
+			//here was coastal check, it was removed. Assume all land tiles neighboring water are coastal.
+			
 			//tile must be accessible -> exception: unblocked blockvis tiles -> clear but guarded by nearby monster coast
 			if( (dp->accessible != CGPathNode::ACCESSIBLE && (dp->accessible != CGPathNode::BLOCKVIS || dt->blocked))
 				|| dt->visitable)  //TODO: passableness problem -> town says it's passable (thus accessible) but we obviously can't disembark onto town gate

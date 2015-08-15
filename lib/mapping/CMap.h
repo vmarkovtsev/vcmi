@@ -276,7 +276,7 @@ struct DLL_LINKAGE TerrainTile
 	Obj topVisitableId(bool excludeTop = false) const;
 	CGObjectInstance * topVisitableObj(bool excludeTop = false) const;
 	bool isWater() const;
-	bool isCoastal() const;
+
 	bool hasFavourableWinds() const;
 
 	ETerrainType terType;
@@ -286,7 +286,7 @@ struct DLL_LINKAGE TerrainTile
 	ERoadType::ERoadType roadType;
 	ui8 roadDir;
 	/// first two bits - how to rotate terrain graphic (next two - river graphic, next two - road);
-	///	7th bit - whether tile is coastal (allows disembarking if land or block movement if water); 8th bit - Favourable Winds effect
+	///	7th bit - whether tile is coastal (allows disembarking if land or block movement if water) - unused; 8th bit - Favourable Winds effect
 	ui8 extTileFlags;
 	bool visitable;
 	bool blocked;
@@ -375,8 +375,10 @@ public:
 	CMapEditManager * getEditManager();
 	TerrainTile & getTile(const int3 & tile);
 	const TerrainTile & getTile(const int3 & tile) const;
+	bool isCoastalTile(const int3 & pos) const;
 	bool isInTheMap(const int3 & pos) const;
 	bool isWaterTile(const int3 & pos) const;
+
 	bool checkForVisitableDir( const int3 & src, const TerrainTile *pom, const int3 & dst ) const;
 	int3 guardingCreaturePosition (int3 pos) const;
 
