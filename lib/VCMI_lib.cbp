@@ -30,6 +30,7 @@
 					<Add option="-lboost_thread$(#boost.libsuffix)" />
 					<Add option="-lboost_chrono$(#boost.libsuffix)" />
 					<Add option="-lboost_locale$(#boost.libsuffix)" />
+					<Add option="-lboost_date_time$(#boost.libsuffix)" />
 					<Add option="-liconv" />
 					<Add directory="$(#sdl2.lib)" />
 					<Add directory="$(#boost.lib32)" />
@@ -58,6 +59,7 @@
 					<Add option="-lboost_thread$(#boost.libsuffix)" />
 					<Add option="-lboost_chrono$(#boost.libsuffix)" />
 					<Add option="-lboost_locale$(#boost.libsuffix)" />
+					<Add option="-lboost_date_time$(#boost.libsuffix)" />
 					<Add option="-liconv" />
 					<Add directory="$(#sdl2.lib)" />
 					<Add directory="$(#boost.lib32)" />
@@ -87,6 +89,7 @@
 					<Add option="-lboost_thread$(#boost.libsuffix)" />
 					<Add option="-lboost_chrono$(#boost.libsuffix)" />
 					<Add option="-lboost_locale$(#boost.libsuffix)" />
+					<Add option="-lboost_date_time$(#boost.libsuffix)" />
 					<Add option="-liconv" />
 					<Add directory="$(#sdl2.lib64)" />
 					<Add directory="$(#boost.lib64)" />
