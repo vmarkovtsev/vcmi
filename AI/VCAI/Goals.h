@@ -255,7 +255,7 @@ public:
 };
 class CollectRes : public CGoal<CollectRes>
 {
-public:	
+public:
 	CollectRes() : CGoal (Goals::COLLECT_RES){};
 
 	CollectRes(int rid, int val) : CGoal (Goals::COLLECT_RES) {resID = rid; value = val; priority = 2;};
@@ -325,7 +325,7 @@ public:
 	TSubgoal whatToDoToAchieve() override;
 	bool operator== (VisitTile &g) { return g.goalType == goalType && g.tile == tile; }
 	std::string completeMessage() const override;
-}; 
+};
 class ClearWayTo : public CGoal<ClearWayTo>
 {
 public:
@@ -346,7 +346,7 @@ public:
 	DigAtTile(int3 Tile) : CGoal (Goals::DIG_AT_TILE) {tile = Tile; priority = 20;};
 	TGoalVec getAllPossibleSubgoals() override {return TGoalVec();};
 	TSubgoal whatToDoToAchieve() override;
-	bool operator== (DigAtTile &g) { g.goalType == goalType && g.tile == tile; }
+	bool operator== (DigAtTile &g) { return g.goalType == goalType && g.tile == tile; }
 };
 
 class CIssueCommand : public CGoal<CIssueCommand>
